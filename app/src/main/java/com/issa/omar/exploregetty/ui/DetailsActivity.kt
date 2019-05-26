@@ -33,7 +33,7 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private lateinit var mapView: MapView
-    private lateinit var hoursList: ListView
+    private lateinit var hoursList: RecyclerView
     private lateinit var photosList: RecyclerView
     private lateinit var binding: ActivityDetailsBinding
 
@@ -56,7 +56,6 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun updateView() {
         viewModel.setDetails()
         addMapMarker()
-        hoursList.adapter = HoursAdapter(this, viewModel.hours)
         setupRecyclerView()
         showDetails()
         Picasso.get().load(viewModel.imageUrl).into(binding.headerImage)
@@ -64,8 +63,10 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupRecyclerView() {
+        hoursList.layoutManager = LinearLayoutManager(this)
+        hoursList.adapter = HoursAdapter(viewModel.hours)
         photosList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        photosList.adapter = PhotosAdapter(this, viewModel.photos)
+        photosList.adapter = PhotosAdapter(viewModel.photos)
     }
 
     private fun showDetails() {

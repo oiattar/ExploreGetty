@@ -17,7 +17,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/phone"
                 android:text="@string/hours_label"/>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hours"
                 android:layout_width="300dp"
                 android:layout_height="150dp"

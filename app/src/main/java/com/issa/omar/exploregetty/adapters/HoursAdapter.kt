@@ -1,34 +1,27 @@
 package com.issa.omar.exploregetty.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.issa.omar.exploregetty.R
 import com.issa.omar.exploregetty.model.OpenHours
 import java.util.*
 
-class HoursAdapter(private val context: Context, private val hours: List<OpenHours>) : BaseAdapter() {
+class HoursAdapter(private val hours: List<OpenHours>):
+    RecyclerView.Adapter<HoursAdapter.HoursViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoursViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_hours, parent,false)
+        return HoursViewHolder(view)
+    }
 
-    override fun getView(pos: Int, view: View?, parent: ViewGroup?): View {
-        val viewholder: ViewHolder
-        var dailyHour = view
+    override fun getItemCount(): Int = hours.size
 
-        if (dailyHour == null) {
-            dailyHour = LayoutInflater.from(parent?.context).inflate(R.layout.item_hours, parent,false)
-            viewholder = ViewHolder(dailyHour)
-            dailyHour.tag = viewholder
-        } else {
-            viewholder = dailyHour.tag as ViewHolder
-        }
-
-        val openHours: OpenHours = getItem(pos)
-        viewholder.dayText.text = getDay(openHours)
-        viewholder.timeText.text = getTime(openHours)
-
-        return dailyHour!!
+    override fun onBindViewHolder(holder: HoursViewHolder, position: Int) {
+        val openHours: OpenHours = hours[position]
+        holder.dayText.text = getDay(openHours)
+        holder.timeText.text = getTime(openHours)
     }
 
     private fun getDay(openHours: OpenHours): String {
@@ -62,19 +55,7 @@ class HoursAdapter(private val context: Context, private val hours: List<OpenHou
         return "$hour:$minute $am_pm"
     }
 
-    override fun getItem(pos: Int): OpenHours {
-        return hours[pos]
-    }
-
-    override fun getItemId(pos: Int): Long {
-        return pos.toLong()
-    }
-
-    override fun getCount(): Int {
-        return hours.size
-    }
-
-    private class ViewHolder(view: View) {
+    class HoursViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val dayText: TextView = view.findViewById(R.id.day)
         val timeText: TextView = view.findViewById(R.id.time)
     }
