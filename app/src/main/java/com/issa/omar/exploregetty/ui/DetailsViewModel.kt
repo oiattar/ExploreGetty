@@ -1,4 +1,4 @@
-package com.issa.omar.exploregetty
+package com.issa.omar.exploregetty.ui
 
 import android.app.Application
 import android.util.Log
@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
+import com.issa.omar.exploregetty.R
 import com.issa.omar.exploregetty.model.BusinessDetails
 import com.issa.omar.exploregetty.model.OpenHours
 import com.issa.omar.exploregetty.rest.YelpRepository
@@ -28,6 +29,9 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
     val reviews: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+    val categories: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
     val address: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -35,7 +39,9 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         MutableLiveData<String>()
     }
     var hours: List<OpenHours> = mutableListOf()
+    var photos: List<String> = mutableListOf()
     var imageUrl: String = ""
+    var url: String = ""
 
     fun getDetails(): LiveData<BusinessDetails> {
         return details
@@ -45,9 +51,13 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         name.value = details.value!!.name
         rating.value = details.value!!.rating
         reviews.value = getApplication<Application>().getString(R.string.reviews, details.value!!.reviewCount)
+        categories.value = details.value!!.categories.joinToString { it.title }
         address.value = details.value!!.location.displayAddress.joinToString(separator = "\n") {it}
         phone.value = getApplication<Application>().getString(R.string.phone, details.value!!.phone)
         hours = getFixedHours()
+        photos = details.value!!.photos
+        url = details.value!!.url
+        Log.d("MOONZ", url)
         imageUrl = details.value!!.imageUrl
     }
 

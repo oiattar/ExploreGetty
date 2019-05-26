@@ -8,14 +8,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.issa.omar.exploregetty.DetailsViewModel" />
+            type="com.issa.omar.exploregetty.ui.DetailsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            tools:context=".MainActivity">
+            tools:context=".ui.DetailsActivity">
 
         <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar"

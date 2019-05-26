@@ -1,4 +1,4 @@
-package com.issa.omar.exploregetty
+package com.issa.omar.exploregetty.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.issa.omar.exploregetty.R
 import com.issa.omar.exploregetty.model.OpenHours
 import java.util.*
 
