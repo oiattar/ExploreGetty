@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_main"
+    tools:context=".MainActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.issa.omar.exploregetty.DetailsViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="@{viewModel.name}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:text="The Getty Center"/>
+
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:rating="@{safeUnbox(viewModel.rating)}"
+                app:layout_constraintLeft_toLeftOf="@id/name"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <TextView
+                android:id="@+id/num_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@{viewModel.reviews}"
+                app:layout_constraintTop_toTopOf="@id/rating"
+                app:layout_constraintBottom_toBottomOf="@id/rating"
+                app:layout_constraintLeft_toRightOf="@id/rating"
+                tools:text="3876 reviews"/>
+
+            <com.google.android.gms.maps.MapView
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/map_view"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_margin="20dp"
+                map:liteMode="true"
+                map:cameraZoom="16"
+                app:layout_constraintTop_toBottomOf="@id/rating"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:text="@{viewModel.address}"
+                app:layout_constraintTop_toBottomOf="@id/map_view"
+                app:layout_constraintLeft_toLeftOf="@id/map_view"
+                tools:text="1200 Getty Center\nLos Angeles, CA 90059"/>
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                android:text="@{viewModel.phone}"
+                app:layout_constraintTop_toBottomOf="@id/address"
+                app:layout_constraintLeft_toLeftOf="@id/address"
+                tools:text="Call (888) 765-9876"/>
+
+            <TextView
+                android:id="@+id/hours_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toBottomOf="@id/phone"
+                app:layout_constraintLeft_toLeftOf="@id/phone"
+                android:text="@string/hours_label"/>
+
+            <ListView
+                android:id="@+id/hours"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:divider="@null"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/hours_label"
+                app:layout_constraintLeft_toLeftOf="@id/hours_label"
+                tools:listitem="@layout/item_hours"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

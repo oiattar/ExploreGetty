@@ -1,5 +1,7 @@
 package com.issa.omar.exploregetty.rest
 
+import com.issa.omar.exploregetty.model.BusinessDetails
+import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,5 +25,5 @@ interface YelpApiService {
     }
 
     @GET("businesses/{id}")
-    fun getDetails(@Header("Authorization") auth: String, @Path("id") id: String)
+    fun getDetails(@Header("Authorization") auth: String, @Path("id") id: String): Observable<BusinessDetails>
 }
