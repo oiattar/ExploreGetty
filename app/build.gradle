@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -18,8 +22,8 @@ android {
     }
     buildTypes {
         buildTypes.each {
-            it.buildConfigField 'String', 'YelpAPIKey', YelpAPIKey
-            it.resValue 'string', 'MapsAPIKey', MapsAPIKey
+            it.buildConfigField 'String', 'YelpAPIKey', localProperties['YelpAPIKey']
+            it.resValue 'string', 'MapsAPIKey', localProperties['MapsAPIKey']
         }
         release {
             minifyEnabled false

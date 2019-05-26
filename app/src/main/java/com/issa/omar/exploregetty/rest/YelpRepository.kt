@@ -24,9 +24,7 @@ object YelpRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { result ->
-                        Log.d("MOONZ", result.toString())
-                        details.value = result },
+                    { result -> details.value = result },
                     { error -> Log.e(TAG, "error: ${error.message}") }
                 )
     }

@@ -37,25 +37,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+        binding.toolbarLayout.title = ""
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         mapView = binding.businessDetails.mapView
         hoursList = binding.businessDetails.hours
         initMapView(savedInstanceState)
         viewModel.getDetails().observe(this, Observer<BusinessDetails> {
-            Log.d("MOONZ", "observed")
-            viewModel.setDetails()
-            addMapMarker()
-            Log.d("MOONZ", viewModel.hours.toString())
-            hoursList.adapter = HoursAdapter(this, viewModel.hours)
-            showDetails()
-            Picasso.get().load(viewModel.imageUrl).into(binding.headerImage)
-            binding.toolbarLayout.title = viewModel.name.value
+            updateView()
         })
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+    }
+
+    private fun updateView() {
+        viewModel.setDetails()
+        addMapMarker()
+        hoursList.adapter = HoursAdapter(this, viewModel.hours)
+        showDetails()
+        Picasso.get().load(viewModel.imageUrl).into(binding.headerImage)
+        binding.toolbarLayout.title = viewModel.name.value
     }
 
     private fun showDetails() {

@@ -49,7 +49,6 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         phone.value = getApplication<Application>().getString(R.string.phone, details.value!!.phone)
         hours = getFixedHours()
         imageUrl = details.value!!.imageUrl
-        Log.d("MOONZ", "$name, $rating, $reviews, $address, $phone")
     }
 
     private fun getFixedHours(): List<OpenHours> {
