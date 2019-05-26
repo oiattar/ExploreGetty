@@ -17,7 +17,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -102,9 +102,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
                 android:text="@{viewModel.phone}"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="8dp"
+                android:autoLink="phone"
                 app:layout_constraintTop_toBottomOf="@id/address"
                 app:layout_constraintLeft_toLeftOf="@id/address"
-                tools:text="Call (888) 765-9876"/>
+                tools:text="(888) 765-9876"/>
 
             <TextView
                 android:id="@+id/hours_label"

@@ -53,11 +53,9 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         reviews.value = getApplication<Application>().getString(R.string.reviews, details.value!!.reviewCount)
         categories.value = details.value!!.categories.joinToString { it.title }
         address.value = details.value!!.location.displayAddress.joinToString(separator = "\n") {it}
-        phone.value = getApplication<Application>().getString(R.string.phone, details.value!!.phone)
+        phone.value = details.value!!.phone
         hours = getFixedHours()
         photos = details.value!!.photos
-        url = details.value!!.url
-        Log.d("MOONZ", url)
         imageUrl = details.value!!.imageUrl
     }
 
